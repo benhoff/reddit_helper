@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 import sys 
 import os
@@ -65,5 +66,4 @@ def main():
         reddit_submission.add_comment(comment)
         print('Commented!')
 
-if __name__ == '__main__':
-    main()
+main()
