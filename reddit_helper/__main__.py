@@ -27,7 +27,8 @@ def main():
     reddit_username = settings['reddit_username']
     github_username = settings['github_username']
 
-    latest_commits = github.get_most_recent_commits(github_username)
+    latest_commits = github.get_most_recent_commits(github_username,
+                                                    settings['num_hours_interested_in'])
 
     EDITOR = os.environ.get('EDITOR','vim') #that easy!
 

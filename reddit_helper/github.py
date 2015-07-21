@@ -1,7 +1,7 @@
 import requests
 import datetime
 
-def get_most_recent_commits(github_name):
+def get_most_recent_commits(github_name, hours_to_go_back=8):
     url = 'https://api.github.com/users/{}/events'.format(github_name)
     r = requests.get(url)
     events = r.json()
@@ -14,7 +14,7 @@ def get_most_recent_commits(github_name):
     most_recent_commits = {}
 
     current_time = datetime.datetime.utcnow()
-    tweleve_hour_delta = datetime.timedelta(hours=48)
+    tweleve_hour_delta = datetime.timedelta(hours=hours_to_go_back)
 
     for push_event in push_events:
         push_time = datetime.datetime.strptime(push_event['created_at'], 
