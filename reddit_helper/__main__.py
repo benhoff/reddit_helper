@@ -42,7 +42,7 @@ def main():
                 commit = commit['sha'])
 
         initial_message += s
-        if index < num_of_repos_changed:
+        if index < num_of_repos_changed - 1:
             initial_message += and_message
 
     comment = ''
@@ -52,12 +52,15 @@ def main():
         call([EDITOR, tempfile_.name])
         tempfile_.seek(0)
         comment = tempfile_.read()
+
+    print("One second......")
+    reddit_submission = reddit.get_most_recent_submission(reddit_username,
+            settings['reddit_password'])
     
     _ = os.system('clear')
+    print('Commenting in: {}'.format(reddit_submission.title))
     user_prompt = input('Submit? (Y/N): ')
     if user_prompt.lower() in ['yes', 'y', 'yeppers']:
-        reddit_submission = reddit.get_most_recent_submission(reddit_username,
-                settings['reddit_password'])
         
         reddit_submission.add_comment(comment)
         print('Commented!')
